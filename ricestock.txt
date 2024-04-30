@@ -1,0 +1,36 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class RiceStock {
+    private Map<String, Integer> stock;
+
+    public RiceStock() {
+        stock = new HashMap<>();
+    }
+
+    public void addRice(String variety, int quantity) {
+        if (stock.containsKey(variety)) {
+            int currentQuantity = stock.get(variety);
+            stock.put(variety, currentQuantity + quantity);
+        } else {
+            stock.put(variety, quantity);
+        }
+    }
+
+    public int getStock(String variety) {
+        return stock.getOrDefault(variety, 0);
+    }
+
+    public static void main(String[] args) {
+        RiceStock riceStock = new RiceStock();
+        
+        // Adding rice bags to the stock
+        riceStock.addRice("Basmati", 100);
+        riceStock.addRice("Jasmine", 150);
+        riceStock.addRice("Long Grain", 200);
+        
+        // Retrieving stock of a particular variety
+        System.out.println("Stock of Basmati rice: " + riceStock.getStock("Basmati"));
+        System.out.println("Stock of Jasmine rice: " + riceStock.getStock("Jasmine"));
+        System.out.println("Stock of Sushi rice: " + riceStock.getStock("Sushi")); // This variety is not present
+    }
